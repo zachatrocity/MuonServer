@@ -26,15 +26,21 @@ cloak.configure({
     },
 
     joinLobby: function(arg, user) {
-      cloak.getLobby().addMember(user);
-      user.message('joinLobbyResponse');
+      var success = cloak.getLobby().addMember(user);
+      user.message('joinLobbyResponse', success);
     },
 
     listUsers: function(arg, user){
-    	console.log('sending users to client..');
-    	var users = cloak.getUsers();
-	    var usernames = _.pluck(users, 'name');
-    	user.message('listUsersResponse',{'data' : usernames})
+    	user.message('refreshLobby', {
+        users: user.room.getMembers(true),
+        inLobby: user.room.isLobby,
+        roomCount: user.room.getMembers().length,
+        roomSize: user.room.size
+      });
+    },
+
+    listRooms: function(arg, user){
+      user.message('refreshRooms', cloak.getRooms(true));
     }
   }
 });
