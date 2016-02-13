@@ -40,7 +40,17 @@ cloak.configure({
     },
 
     listRooms: function(arg, user){
+      console.log("creating room");
       user.message('refreshRooms', cloak.getRooms(true));
+    },
+
+    createRoom: function(arg, user) {
+      var room = cloak.createRoom(arg.name, 2);
+      var success = room.addMember(user);
+      user.message('roomCreated', {
+        success: success,
+        roomId: room.id
+      });
     }
   }
 });
