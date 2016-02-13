@@ -23,6 +23,7 @@ cloak.configure({
         console.log('creating user');
       }
       user.message('registerUsernameResponse', success);
+      cloak.messageAll('refreshAll');
     },
 
     joinLobby: function(arg, user) {
@@ -51,6 +52,7 @@ cloak.configure({
         success: success,
         roomId: room.id
       });
+      cloak.messageAll('refreshAll');
     }
   }
 });
