@@ -54,13 +54,18 @@ cloak.configure({
       });
       cloak.messageAll('refreshAll');
     },
+
     joinRoom: function(id, user) {
       cloak.getRoom(id).addMember(user);
       user.message('joinRoomResponse', {
         id: id,
         success: true
       });
-    }
+    },
+
+    refreshRoom: function(arg, user) {
+      user.message('refreshRoomResponse', user.room.getMembers(true));
+    },
 
   }
 });
