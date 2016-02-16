@@ -56,18 +56,83 @@ cloak.configure({
     },
 
     joinRoom: function(id, user) {
-      cloak.getRoom(id).addMember(user);
-      user.message('joinRoomResponse', {
-        id: id,
-        success: true
-      });
+      var room = cloak.getRoom(id)
+      if (room.getMembers().length < 2)
+      {
+        room.addMember(user);
+        user.message('joinRoomResponse', {
+          id: id,
+          success: true
+        });
+      } else {
+        user.message('joinRoomResponse', {
+          id: id,
+          success: false
+        });
+      }
+      
     },
 
     refreshRoom: function(arg, user) {
       user.message('refreshRoomResponse', user.room.getMembers(true));
     },
 
+  },
+
+  room: {
+    init: function() {
+      this.turn = 'muon';
+      this.lastMove = {};
+
+      this.teams = {
+        muon: '',
+        antimuon: ''
+      };
+     
+      console.log('created room ' + this.id);
+      this.data.lastReportedAge = 0;
+    },
+
+    newMember: function(user) {
+      if (this.teams.muon === '') { //host
+        this.teams.muon = user.id;
+        user.team = 'muon';
+        user.message('userMessage', 'your are muons and your id is ' + user.id);
+      }
+      else if (this.teams.antimuon === '') { //client
+        this.teams.antimuon = user.id;
+        user.team = 'antimuon';
+        user.message('userMessage', 'your team is antimuons and your id is ' + user.id);
+      }
+      else {
+        var msg = 'Um, we tried to assign a team member but all teams were taken for this room.';
+        console.log(msg);
+        user.team = 'none';
+        user.message('userMessage', msg);
+      }
+      user.message('assignTeam', {
+        team: user.team,
+        turn: this.turn
+      });
+    },
+
+    memberLeaves: function(user) {
+      // if we have 0 people in the room, close the room
+      if (this.getMembers().length <= 0) {
+        this.delete();
+      }
+    },
+
+    pulse: function() {
+      // add timed turn stuff here
+    },
+
+    close: function() {
+      this.messageMembers('you have left ' + this.name);
+    }
+
   }
+
 });
 
 cloak.run();
