@@ -41,7 +41,6 @@ cloak.configure({
     },
 
     listRooms: function(arg, user){
-      console.log("creating room");
       user.message('refreshRooms', cloak.getRooms(true));
     },
 
@@ -77,7 +76,8 @@ cloak.configure({
       user.message('refreshRoomResponse', user.room.getMembers(true));
     },
 
-    turnDone: function(from,to, user){
+    turnDone: function(move, user){
+      //move[0] is from and move[1] is to
       // If it's currently the turn of the user and they say they're done, advance the turn
       console.log(user);
       if (user.team === user.room.turn) {
@@ -88,7 +88,7 @@ cloak.configure({
         return member.id === user.id;
       });
       console.log("sending move to player:", otherPlayer[0]);
-      otherPlayer[0].message('performOpponentMove', [from,to, user.room.lastMove]);
+      otherPlayer[0].message('performOpponentMove', [move[0],move[1], user.room.lastMove]);
 
       user.room.messageMembers('turn', user.room.turn);
 
