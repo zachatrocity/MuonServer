@@ -79,7 +79,6 @@ cloak.configure({
     turnDone: function(move, user){
       //move[0] is from and move[1] is to
       // If it's currently the turn of the user and they say they're done, advance the turn
-      console.log(user);
       if (user.team === user.room.turn) {
         user.room.turn = (user.room.turn === 'muon') ? 'antimuon' : 'muon';
       }
@@ -88,7 +87,8 @@ cloak.configure({
         return member.id === user.id;
       });
       console.log("sending move to player:", otherPlayer[0]);
-      otherPlayer[0].message('performOpponentMove', [move[0],move[1], user.room.lastMove]);
+      user.room.lastMove = {from: move[0], to: move[1]};
+      otherPlayer[0].message('performOpponentMove', [move[0],move[1]]);
 
       user.room.messageMembers('turn', user.room.turn);
 
