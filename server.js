@@ -77,6 +77,20 @@ cloak.configure({
       user.message('refreshRoomResponse', user.room.getMembers(true));
     },
 
+    turnDone: function(targetId, user){
+      // If it's currently the turn of the user and they say they're done, advance the turn
+      if (user.team === user.room.turn) {
+        user.room.turn = (user.room.turn === 'muon') ? 'antimuon' : 'muon';
+      }
+      // let the other player know
+      var otherPlayer = _.reject(user.room.members, function(member) {
+        return member.id === user.id;
+      });
+      otherPlayer[0].message('placedTarget', [targetId, user.room.lastMove]);
+
+      user.room.messageMembers('turn', user.room.turn);
+    
+    }
   },
 
   room: {
