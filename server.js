@@ -22,7 +22,7 @@ cloak.configure({
         user.name = username;
         console.log('creating user');
       }
-      user.message('registerUsernameResponse', success);
+      user.message('registerUsernameResponse', [success, username]);
       cloak.messageAll('refreshAll');
     },
 
