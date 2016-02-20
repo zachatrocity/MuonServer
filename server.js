@@ -72,6 +72,10 @@ cloak.configure({
       
     },
 
+    chat: function(msg, user) {
+      user.getRoom().messageMembers('chat', msg);
+    },
+
     refreshRoom: function(arg, user) {
       user.message('refreshRoomResponse', user.room.getMembers(true));
     },
