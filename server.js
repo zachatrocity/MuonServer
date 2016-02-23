@@ -14,22 +14,21 @@ cloak.configure({
     registerUsername: function(arg, user) {
       var users = cloak.getUsers();
       var username = arg.username;
-      console.log(username);
       var usernames = _.pluck(users, 'username');
       var success = false;
-      console.log(users);
+      console.log(usernames);
       if (_.indexOf(usernames, username) === -1) {
         success = true;
         user.name = username;
-        console.log('creating user');
       }
       user.message('registerUsernameResponse', [success, username]);
-      cloak.messageAll('refreshAll');
     },
 
     joinLobby: function(arg, user) {
       var success = cloak.getLobby().addMember(user);
       user.message('joinLobbyResponse', success);
+      if(success)
+        cloak.messageAll('refreshAll');
     },
 
     listUsers: function(arg, user){
