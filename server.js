@@ -21,8 +21,14 @@ cloak.configure({
       if (_.indexOf(usernames, username) === -1) {
         success = true;
         user.name = username;
+        user.message('registerUsernameResponse', [success, username]);
+      }else{
+        //resume so add back to the lobby
+        var success = cloak.getLobby().addMember(user);
+        user.message('joinLobbyResponse', success);
+        if(success)
+          cloak.messageAll('refreshAll');
       }
-      user.message('registerUsernameResponse', [success, username]);
     },
 
     joinLobby: function(arg, user) {
