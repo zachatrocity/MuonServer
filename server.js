@@ -72,6 +72,10 @@ cloak.configure({
       
     },
 
+    leaveRoom: function(arg, user) {
+      user.leaveRoom();
+    },
+
     chat: function(msg, user) {
       user.getRoom().messageMembers('chat', [msg, user.name]);
     },
