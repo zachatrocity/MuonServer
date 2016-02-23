@@ -8,7 +8,7 @@ cloak.configure({
   autoJoinLobby: false,
   minRoomMembers: 1,
   pruneEmptyRooms: 1000,
-  reconnectWait: 3000,
+  reconnectWait: 9000,
 
   messages: {
     registerUsername: function(arg, user) {
