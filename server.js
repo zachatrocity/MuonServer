@@ -8,7 +8,7 @@ cloak.configure({
   autoJoinLobby: false,
   minRoomMembers: 1,
   pruneEmptyRooms: 1000,
-  reconnectWait: 10000,
+  reconnectWait: 0,
 
   messages: {
     registerUsername: function(arg, user) {
@@ -24,9 +24,9 @@ cloak.configure({
         user.message('registerUsernameResponse', [success, username]);
       }else{
         //resume so add back to the lobby
-        var success = cloak.getLobby().addMember(user);
-        user.message('joinLobbyResponse', success);
-        if(success)
+        var successadd = cloak.getLobby().addMember(user);
+        user.message('joinLobbyResponse', successadd);
+        if(successadd)
           cloak.messageAll('refreshAll');
       }
     },
