@@ -16,7 +16,7 @@ cloak.configure({
       var username = arg.username;
       var usernames = _.pluck(users, 'username');
       var success = false;
-      console.log(usernames);
+      console.log(users);
       if (_.indexOf(usernames, username) === -1) {
         success = true;
         user.name = username;
