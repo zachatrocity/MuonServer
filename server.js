@@ -14,9 +14,10 @@ cloak.configure({
     registerUsername: function(arg, user) {
       var users = cloak.getUsers();
       var username = arg.username;
-      var usernames = _.pluck(users, 'username');
+      var usernames = _.pluck(users, 'name');
       var success = false;
       console.log(users);
+      console.log(usernames);
       if (_.indexOf(usernames, username) === -1) {
         success = true;
         user.name = username;
