@@ -79,7 +79,7 @@ cloak.configure({
 
     disconnectUser: function(arg,user){
       user.delete();
-    }
+    },
 
     chat: function(msg, user) {
       user.getRoom().messageMembers('chat', [msg, user.name]);
