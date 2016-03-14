@@ -113,7 +113,10 @@ cloak.configure({
 
     }, 
     proposeDraw: function(arg, user){
-      user.room.messageMembers('proposeDrawResponse');
+      user.room.messageMembers('proposeDrawResponse', [user.name]);
+    },
+    respondToDraw: function(accept, user){
+      user.room.messageMembers('respondToDrawResponse', [accept]);
     }
   },
 
