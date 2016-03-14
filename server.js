@@ -111,6 +111,9 @@ cloak.configure({
 
       user.room.messageMembers('turn', user.room.turn);
 
+    }, 
+    proposeDraw: function(arg, user){
+      user.room.messageMembers('proposeDrawResponse');
     }
   },
 
