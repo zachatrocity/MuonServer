@@ -117,6 +117,12 @@ cloak.configure({
     },
     respondToDraw: function(accept, user){
       user.room.messageMembers('respondToDrawResponse', [accept]);
+    },
+    proposeRematch: function(arg, user){
+      user.room.messageMembers('proposeRematchResponse', [user.name]);
+    },
+    respondToRematch: function(accept, user){
+      user.room.messageMembers('respondToRematchResponse', [accept]);
     }
   },
 
