@@ -163,7 +163,7 @@ cloak.configure({
         team: user.team,
         turn: this.turn
       });
-      console.log(this.timer.getValue);
+      console.log(this.timer.getValue());
       this.timer.sync(user);
     },
 
