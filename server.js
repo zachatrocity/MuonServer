@@ -131,8 +131,6 @@ cloak.configure({
     init: function() {
       this.turn = 'muon';
       this.lastMove = {};
-      this.timer = cloak.createTimer('gametimer');
-      this.timer.start()
       this.teams = {
         muon: '',
         antimuon: ''
@@ -163,17 +161,16 @@ cloak.configure({
         team: user.team,
         turn: this.turn
       });
-      console.log(this.timer.getValue());
-      this.timer.sync(user);
     },
 
     memberLeaves: function(user) {
+      if(user.team == 'muon')
+        this.teams.muon = '';
+      else if(user.team == 'antimuon')
+        this.teams.antimuon = '';
+
       // if we have 0 people in the room, close the room
       if (this.getMembers().length <= 0) {
-        if(user.team == 'muon')
-          this.teams.muon = '';
-        else if(user.team == 'antimuon')
-          this.teams.antimuon = '';
         this.delete();
       }
     },
