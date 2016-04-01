@@ -8,7 +8,6 @@ cloak.configure({
   autoJoinLobby: false,
   minRoomMembers: 1,
   pruneEmptyRooms: 1000,
-  reconnectWait: 0,
 
   messages: {
     registerUsername: function(arg, user) {
@@ -63,13 +62,20 @@ cloak.configure({
 
     joinRoom: function(id, user) {
       var room = cloak.getRoom(id)
-      if (room.getMembers().length < 2)
+      var memCount = room.getMembers().length;
+      if (memCount < 2)
       {
         room.addMember(user);
         user.message('joinRoomResponse', {
           id: id,
           success: true
         });
+        if(memCount == 2){
+          //start the timer.
+          room.timer.start()
+        }
+        
+        room.timer.sync(user);
       } else {
         user.message('joinRoomResponse', {
           id: id,
@@ -130,6 +136,7 @@ cloak.configure({
     init: function() {
       this.turn = 'muon';
       this.lastMove = {};
+      this.timer = cloak.createTimer('timer' + this.id);
 
       this.teams = {
         muon: '',
