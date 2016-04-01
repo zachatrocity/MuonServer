@@ -70,11 +70,7 @@ cloak.configure({
           id: id,
           success: true
         });
-        if(memCount == 2){
-          //start the timer.
-          room.timer.start()
-        }
-        
+
         room.timer.sync(user);
       } else {
         user.message('joinRoomResponse', {
@@ -137,7 +133,7 @@ cloak.configure({
       this.turn = 'muon';
       this.lastMove = {};
       this.timer = cloak.createTimer('timer' + this.id);
-
+      this.timer.start()
       this.teams = {
         muon: '',
         antimuon: ''
