@@ -170,6 +170,10 @@ cloak.configure({
     memberLeaves: function(user) {
       // if we have 0 people in the room, close the room
       if (this.getMembers().length <= 0) {
+        if(user.team == 'muon')
+          this.teams.muon = '';
+        else if(user.team == 'antimuon')
+          this.teams.antimuon = '';
         this.delete();
       }
     },
