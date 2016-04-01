@@ -8,6 +8,7 @@ cloak.configure({
   autoJoinLobby: false,
   minRoomMembers: 1,
   pruneEmptyRooms: 1000,
+  reconnectWait: 10000,
 
   messages: {
     registerUsername: function(arg, user) {
@@ -70,8 +71,6 @@ cloak.configure({
           id: id,
           success: true
         });
-
-        room.timer.sync(user);
       } else {
         user.message('joinRoomResponse', {
           id: id,
@@ -132,7 +131,7 @@ cloak.configure({
     init: function() {
       this.turn = 'muon';
       this.lastMove = {};
-      this.timer = cloak.createTimer('timer' + this.id);
+      this.timer = cloak.createTimer('gametimer');
       this.timer.start()
       this.teams = {
         muon: '',
@@ -164,6 +163,8 @@ cloak.configure({
         team: user.team,
         turn: this.turn
       });
+
+      this.timer.sync(user);
     },
 
     memberLeaves: function(user) {
