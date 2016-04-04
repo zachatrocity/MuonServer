@@ -39,12 +39,14 @@ cloak.configure({
     },
 
     listUsers: function(arg, user){
-    	user.message('refreshLobby', {
-        users: user.room.getMembers(true),
-        inLobby: user.room.isLobby,
-        roomCount: user.room.getMembers().length,
-        roomSize: user.room.size
-      });
+      if(user.room.getMembers != undefined){
+      	user.message('refreshLobby', {
+          users: user.room.getMembers(true),
+          inLobby: user.room.isLobby,
+          roomCount: user.room.getMembers().length,
+          roomSize: user.room.size
+        });
+      }
     },
 
     listRooms: function(arg, user){
