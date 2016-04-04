@@ -87,6 +87,7 @@ cloak.configure({
     },
 
     disconnectUser: function(arg,user){
+      console.log('deleting ', user);
       user.delete();
     },
 
