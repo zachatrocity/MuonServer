@@ -8,7 +8,7 @@ cloak.configure({
   autoJoinLobby: false,
   minRoomMembers: 1,
   pruneEmptyRooms: 1000,
-  reconnectWait: 10000,
+  reconnectWait: null,
 
   messages: {
     registerUsername: function(arg, user) {
@@ -172,6 +172,8 @@ cloak.configure({
       // if we have 0 people in the room, close the room
       if (this.getMembers().length <= 0) {
         this.delete();
+        //refresh the lobby
+        cloak.messageAll('refreshAll');
       }
     },
 
