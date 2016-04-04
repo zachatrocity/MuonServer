@@ -32,10 +32,14 @@ cloak.configure({
     },
 
     joinLobby: function(arg, user) {
-      var success = cloak.getLobby().addMember(user);
-      user.message('joinLobbyResponse', success);
-      if(success)
-        cloak.messageAll('refreshAll');
+      var usernames = _.pluck(users, 'name');
+      if(_.indexOf(usernames, user.name) !== -1)
+      {
+        var success = cloak.getLobby().addMember(user);
+        user.message('joinLobbyResponse', success);
+        if(success)
+          cloak.messageAll('refreshAll');
+      }
     },
 
     listUsers: function(arg, user){
