@@ -32,6 +32,7 @@ cloak.configure({
     },
 
     joinLobby: function(arg, user) {
+      var users = cloak.getUsers();
       var usernames = _.pluck(users, 'name');
       if(_.indexOf(usernames, user.name) !== -1)
       {
