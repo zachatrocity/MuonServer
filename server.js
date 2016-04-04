@@ -84,6 +84,8 @@ cloak.configure({
 
     leaveRoom: function(arg, user) {
       user.leaveRoom();
+      console.log('removing ', user);
+      user.delete();
     },
 
     disconnectUser: function(arg,user){
