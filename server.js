@@ -116,9 +116,9 @@ cloak.configure({
       //move[0] is from and move[1] is to and move[3] is the bit board
       console.log(move);
       if(user.team == 'muon'){
-        user.room.muonBoard = move[3];
+        user.room.muonBoard = move[2];
       } else {
-        user.room.antimuonBoard = move[3];
+        user.room.antimuonBoard = move[2];
       }
 
       // If it's currently the turn of the user and they say they're done, advance the turn
