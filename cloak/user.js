@@ -8,7 +8,7 @@ module.exports = (function() {
   function User(cloak, socket, data) {
     this.cloak = cloak;
     this.id = uuid.v4();
-    this.userid = this.id;
+    this.userid = null;
     this._socket = socket;
     this.name = 'Nameless User';
     this.disconnectedSince = null;
