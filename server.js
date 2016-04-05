@@ -113,7 +113,13 @@ cloak.configure({
     },
 
     turnDone: function(move, user){
-      //move[0] is from and move[1] is to
+      //move[0] is from and move[1] is to and move[3] is the bit board
+      if(user.team == 'muon'){
+        user.room.muonBoard = move[3];
+      } else {
+        user.room.antimuonBoard = move[3];
+      }
+
       // If it's currently the turn of the user and they say they're done, advance the turn
       if (user.team === user.room.turn) {
         user.room.turn = (user.room.turn === 'muon') ? 'antimuon' : 'muon';
@@ -123,7 +129,7 @@ cloak.configure({
         return member.id === user.id;
       });
       console.log("sending move to player:", otherPlayer[0]);
-      user.room.moveHist.push({from: move[0], to: move[1]});
+      user.room.moveHist.push({from: move[0], to: move[1], user.team});
       otherPlayer[0].message('performOpponentMove', [move[0],move[1]]);
 
       user.room.messageMembers('turn', user.room.turn);
@@ -147,6 +153,8 @@ cloak.configure({
     init: function() {
       this.turn = 'muon';
       this.moveHist = [];
+      this.muonBoard = '';
+      this.antimuonBoard = '';
       this.teams = {
         muon: '',
         antimuon: ''
@@ -176,7 +184,9 @@ cloak.configure({
       user.message('assignTeam', {
         team: user.team,
         turn: this.turn,
-        hist: this.moveHist
+        hist: this.moveHist,
+        muonboard: this.muonBoard,
+        antimuonboard: this.antimuonBoard
       });
     },
 
