@@ -16,19 +16,21 @@ cloak.configure({
       var username = arg.username;
       var usernames = _.pluck(users, 'name');
       var success = false;
-      console.log(users);
-      console.log(usernames);
       if (_.indexOf(usernames, username) === -1) {
+        console.log('creating ', user)
         success = true;
         user.name = username;
         user.message('registerUsernameResponse', [success, username]);
       }else{
+        console.log('resuming ', user)
         //resume so add back to the lobby
         var successadd = cloak.getLobby().addMember(user);
         user.message('joinLobbyResponse', successadd);
         if(successadd)
           cloak.messageAll('refreshAll');
       }
+      console.log(users);
+      console.log(usernames);
     },
 
     joinLobby: function(arg, user) {
