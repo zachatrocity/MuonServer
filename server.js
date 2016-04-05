@@ -199,7 +199,7 @@ cloak.configure({
   lobby: {
     pulse: function() {
       // add timed turn stuff here
-      cloak.messageAll('refreshAll');
+      
     }
   }
 
