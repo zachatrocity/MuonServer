@@ -123,7 +123,7 @@ cloak.configure({
         return member.id === user.id;
       });
       console.log("sending move to player:", otherPlayer[0]);
-      user.room.lastMove = {from: move[0], to: move[1]};
+      user.room.moveHist.push({from: move[0], to: move[1]});
       otherPlayer[0].message('performOpponentMove', [move[0],move[1]]);
 
       user.room.messageMembers('turn', user.room.turn);
@@ -146,7 +146,7 @@ cloak.configure({
   room: {
     init: function() {
       this.turn = 'muon';
-      this.lastMove = {};
+      this.moveHist = [];
       this.teams = {
         muon: '',
         antimuon: ''
@@ -175,7 +175,8 @@ cloak.configure({
       }
       user.message('assignTeam', {
         team: user.team,
-        turn: this.turn
+        turn: this.turn,
+        hist: this.moveHist
       });
     },
 
