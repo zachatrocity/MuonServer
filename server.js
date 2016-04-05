@@ -37,8 +37,6 @@ cloak.configure({
         if(successadd)
           cloak.messageAll('refreshAll');
       }
-      console.log(users);
-      console.log(usernames);
     },
 
     joinLobby: function(arg, user) {
@@ -54,8 +52,7 @@ cloak.configure({
     },
 
     listUsers: function(arg, user){
-      console.log(user.room.getMembers)
-      if(user.room.getMembers != undefined){
+      if(user.room.getMembers){
       	user.message('refreshLobby', {
           users: user.room.getMembers(true),
           inLobby: user.room.isLobby,
