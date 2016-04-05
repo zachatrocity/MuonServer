@@ -23,13 +23,13 @@ cloak.configure({
         user.userid = arg.userid;
         user.message('registerUsernameResponse', [success, username]);
       }else{
-        console.log('resuming ', username, ' ', arg.userid)
         //resume so add back to the lobby
         _.each(users, function(usr) {
           if(usr.userid == arg.userid){
             usr.delete();
             user.name = username;
             user.userid = arg.userid;
+            console.log('resuming ', username, ' ', arg.userid)
           }
         })
         var successadd = cloak.getLobby().addMember(user);
@@ -52,6 +52,7 @@ cloak.configure({
     },
 
     listUsers: function(arg, user){
+      console.log(user);
       if(user.room.getMembers != null){
       	user.message('refreshLobby', {
           users: user.room.getMembers(true),
