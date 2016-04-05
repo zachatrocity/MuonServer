@@ -188,8 +188,8 @@ cloak.configure({
 
       // if we have 0 people in the room, close the room
       if (this.getMembers().length <= 0) {
+        console.log('deleting room ', this.id)
         this.delete();
-        //refresh the lobby
       }
       cloak.messageAll('refreshAll');
     },
