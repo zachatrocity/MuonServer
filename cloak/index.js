@@ -111,8 +111,10 @@ module.exports = (function() {
 
         socket.on('disconnect', function(data) {
           var uid = socketIdToUserId[socket.id];
+          console.log(uid)
           var user = cloak._getUser(uid);
           if (!user) {
+            console.log("NO USER");
             return;
           }
           user.disconnectedSince = new Date().getTime();

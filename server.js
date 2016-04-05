@@ -52,7 +52,6 @@ cloak.configure({
     },
 
     listUsers: function(arg, user){
-      console.log(user);
       if(user.room.getMembers != null){
       	user.message('refreshLobby', {
           users: user.room.getMembers(true),
