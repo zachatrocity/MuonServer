@@ -114,6 +114,7 @@ cloak.configure({
 
     turnDone: function(move, user){
       //move[0] is from and move[1] is to and move[3] is the bit board
+      console.log(move);
       if(user.team == 'muon'){
         user.room.muonBoard = move[3];
       } else {
