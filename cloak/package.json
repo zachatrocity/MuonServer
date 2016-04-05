@@ -1,0 +1,60 @@
+{
+  "name": "cloak",
+  "description": "A network layer for HTML5 games",
+  "version": "1.0.0",
+  "homepage": "https://github.com/incompl/cloak",
+  "author": {
+    "name": "Greg and Darius at Bocoup",
+    "url": "http://bocoup.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/incompl/cloak.git"
+  },
+  "bugs": {
+    "url": "https://github.com/incompl/cloak/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/incompl/cloak/blob/master/LICENSE"
+    }
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "keywords": [
+    "html5",
+    "game",
+    "games"
+  ],
+  "dependencies": {
+    "socket.io": "~0.9.16",
+    "underscore": "~1.5.1",
+    "node-uuid": "~1.4.1",
+    "colors": "~0.6.2"
+  },
+  "_id": "cloak@1.0.0",
+  "scripts": {},
+  "_shasum": "bb70afda7ff4ea817dca0ceec6a320398e734ad5",
+  "_from": "cloak@>=1.0.0 <2.0.0",
+  "_npmVersion": "2.7.4",
+  "_nodeVersion": "0.12.2",
+  "_npmUser": {
+    "name": "incompl",
+    "email": "gsmith@incompl.com"
+  },
+  "dist": {
+    "shasum": "bb70afda7ff4ea817dca0ceec6a320398e734ad5",
+    "tarball": "https://registry.npmjs.org/cloak/-/cloak-1.0.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "incompl",
+      "email": "gsmith@incompl.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/cloak/-/cloak-1.0.0.tgz"
+}

@@ -1,4 +1,4 @@
-var cloak = require('cloak');
+var cloak = require('./cloak/index.js');
 var _ = require('underscore');
 
 cloak.configure({
@@ -101,7 +101,7 @@ cloak.configure({
 
     disconnectUser: function(arg,user){
       console.log('deleting ', user);
-      //user.delete();
+      user.delete();
     },
 
     chat: function(msg, user) {
