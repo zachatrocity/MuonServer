@@ -185,8 +185,8 @@ cloak.configure({
         team: user.team,
         turn: this.turn,
         hist: this.moveHist,
-        muonboard: this.muonBoard,
-        antimuonboard: this.antimuonBoard
+        muonBoard: this.muonBoard,
+        antimuonBoard: this.antimuonBoard
       });
     },
 
