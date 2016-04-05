@@ -17,13 +17,13 @@ cloak.configure({
       var usernames = _.pluck(users, 'name');
       var success = false;
       if (_.indexOf(usernames, username) === -1) {
-        console.log('creating ', user)
+        console.log('creating ', username, ' ', arg.userid)
         success = true;
         user.name = username;
         user.id = arg.userid;
         user.message('registerUsernameResponse', [success, username]);
       }else{
-        console.log('resuming ', user)
+        console.log('resuming ', username, ' ', arg.userid)
         //resume so add back to the lobby
         _.each(users, function(usr) {
           if(usr.id == arg.userid){
@@ -54,6 +54,7 @@ cloak.configure({
     },
 
     listUsers: function(arg, user){
+      console.log(user.room.getMembers)
       if(user.room.getMembers != undefined){
       	user.message('refreshLobby', {
           users: user.room.getMembers(true),
