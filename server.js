@@ -86,11 +86,11 @@ cloak.configure({
           success: false
         });
       }
-      
     },
 
-    leaveRoom: function(arg, user) {
+    leaveRoom: function(arg, user){
       user.leaveRoom();
+      cloak.messageAll('refreshAll');
     },
 
     disconnectUser: function(arg,user){
@@ -183,8 +183,8 @@ cloak.configure({
       if (this.getMembers().length <= 0) {
         this.delete();
         //refresh the lobby
-        cloak.messageAll('refreshAll');
       }
+      cloak.messageAll('refreshAll');
     },
 
     pulse: function() {
