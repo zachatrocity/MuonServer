@@ -189,6 +189,7 @@ cloak.configure({
 
     pulse: function() {
       // add timed turn stuff here
+      cloak.messageAll('refreshAll');
     },
 
     close: function() {
