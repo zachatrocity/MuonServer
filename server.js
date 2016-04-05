@@ -20,10 +20,18 @@ cloak.configure({
         console.log('creating ', user)
         success = true;
         user.name = username;
+        user.id = arg.userid;
         user.message('registerUsernameResponse', [success, username]);
       }else{
         console.log('resuming ', user)
         //resume so add back to the lobby
+        _.each(users, function(usr) {
+          if(usr.id == arg.userid){
+            usr.delete();
+            user.name = username;
+            user.id = arg.userid;
+          }
+        })
         var successadd = cloak.getLobby().addMember(user);
         user.message('joinLobbyResponse', successadd);
         if(successadd)
@@ -199,7 +207,7 @@ cloak.configure({
   lobby: {
     pulse: function() {
       // add timed turn stuff here
-      
+
     }
   }
 
