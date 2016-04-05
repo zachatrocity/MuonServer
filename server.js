@@ -8,7 +8,7 @@ cloak.configure({
   autoJoinLobby: false,
   minRoomMembers: 1,
   pruneEmptyRooms: 1000,
-  reconnectWait: 10000,
+  reconnectWait: null,
 
   messages: {
     registerUsername: function(arg, user) {
@@ -34,19 +34,26 @@ cloak.configure({
     },
 
     joinLobby: function(arg, user) {
-      var success = cloak.getLobby().addMember(user);
-      user.message('joinLobbyResponse', success);
-      if(success)
-        cloak.messageAll('refreshAll');
+      var users = cloak.getUsers();
+      var usernames = _.pluck(users, 'name');
+      if(_.indexOf(usernames, user.name) !== -1)
+      {
+        var success = cloak.getLobby().addMember(user);
+        user.message('joinLobbyResponse', success);
+        if(success)
+          cloak.messageAll('refreshAll');
+      }
     },
 
     listUsers: function(arg, user){
-    	user.message('refreshLobby', {
-        users: user.room.getMembers(true),
-        inLobby: user.room.isLobby,
-        roomCount: user.room.getMembers().length,
-        roomSize: user.room.size
-      });
+      if(user.room.getMembers != undefined){
+      	user.message('refreshLobby', {
+          users: user.room.getMembers(true),
+          inLobby: user.room.isLobby,
+          roomCount: user.room.getMembers().length,
+          roomSize: user.room.size
+        });
+      }
     },
 
     listRooms: function(arg, user){
@@ -84,9 +91,11 @@ cloak.configure({
 
     leaveRoom: function(arg, user) {
       user.leaveRoom();
+      user.delete();
     },
 
     disconnectUser: function(arg,user){
+      console.log('deleting ', user);
       user.delete();
     },
 
@@ -174,6 +183,8 @@ cloak.configure({
       // if we have 0 people in the room, close the room
       if (this.getMembers().length <= 0) {
         this.delete();
+        //refresh the lobby
+        cloak.messageAll('refreshAll');
       }
     },
 
