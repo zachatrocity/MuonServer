@@ -20,16 +20,16 @@ cloak.configure({
         console.log('creating ', username, ' ', arg.userid)
         success = true;
         user.name = username;
-        user.id = arg.userid;
+        user.userid = arg.userid;
         user.message('registerUsernameResponse', [success, username]);
       }else{
         console.log('resuming ', username, ' ', arg.userid)
         //resume so add back to the lobby
         _.each(users, function(usr) {
-          if(usr.id == arg.userid){
+          if(usr.userid == arg.userid){
             usr.delete();
             user.name = username;
-            user.id = arg.userid;
+            user.userid = arg.userid;
           }
         })
         var successadd = cloak.getLobby().addMember(user);
