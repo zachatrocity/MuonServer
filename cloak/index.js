@@ -141,7 +141,6 @@ module.exports = (function() {
         socket.on('cloak-resume', function(data) {
           var uid = data.uid;
           var user = users[uid];
-          console.log('NO USER', user);
           if (user !== undefined) {
             socketIdToUserId[socket.id] = uid;
             user._socket = socket;
