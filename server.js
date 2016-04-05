@@ -189,13 +189,18 @@ cloak.configure({
 
     pulse: function() {
       // add timed turn stuff here
-      cloak.messageAll('refreshAll');
     },
 
     close: function() {
       this.messageMembers('you have left ' + this.name);
     }
 
+  },
+  lobby: {
+    pulse: function() {
+      // add timed turn stuff here
+      cloak.messageAll('refreshAll');
+    }
   }
 
 });
