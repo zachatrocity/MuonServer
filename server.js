@@ -146,6 +146,13 @@ cloak.configure({
       user.room.messageMembers('proposeRematchResponse', [user.name]);
     },
     respondToRematch: function(accept, user){
+      if(accept){
+        //reset the room
+        user.room.moveHist = [];
+        user.room.muonBoard = '';
+        user.room.antimuonBoard = '';
+        user.room.turn = 'muon';
+      }
       user.room.messageMembers('respondToRematchResponse', [accept]);
     }
   },
